@@ -11,8 +11,7 @@ export function getProducts() {
     return products;
 }
 
-export function getProductById(id) {
-    console.log("id", id)
+export function getProductById({ id }) {
     const product = products.find((p) => p.id === +id);
     return product;
 }

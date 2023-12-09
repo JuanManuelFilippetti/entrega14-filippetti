@@ -1,13 +1,13 @@
 import express from "express";
 import { graphqlHTTP } from "express-graphql";
 import { schema } from "./graphql/schema.graphql.js";
-import { getProductById,getProducts,createProduct,updateProduct,deleteProduct} from "./graphql/resolvers.graphql.js";
+import { getProductById, getProducts, createProduct, updateProduct, deleteProduct} from "./graphql/resolvers.graphql.js";
 
-const app = express()
+const app = express();
 
 app.use("/graphql", graphqlHTTP({
   schema,
-  rootValue:{
+  rootValue: {
     getProductById,
     getProducts,
     createProduct,

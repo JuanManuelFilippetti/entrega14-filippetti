@@ -1,6 +1,7 @@
 import { buildSchema } from "graphql";
 
 export const schema = buildSchema(`
+
 type Product {
     id: ID
     name: String
@@ -9,8 +10,8 @@ type Product {
 }
 
 input ProductInput {
-    name: String
-    price: Int
+    name: String!
+    price: Int!
     stock: Int
 }
 
