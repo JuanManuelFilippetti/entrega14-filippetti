@@ -1,25 +1,25 @@
 import express from "express";
-import handlebars from "express-handlebars";
-import cookieParser from "cookie-parser";
-import { __dirname } from "./utils.js";
-import "./db/configDB.js";
-const app = express();
+import { graphqlHTTP } from "express-graphql";
+import { schema } from "./graphql/schema.graphql.js";
+import { getProductById,getProducts,createProduct,updateProduct,deleteProduct} from "./graphql/resolvers.graphql.js";
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const app = express()
 
-// cookies
-app.use(cookieParser());
+app.use("/graphql", graphqlHTTP({
+  schema,
+  rootValue:{
+    getProductById,
+    getProducts,
+    createProduct,
+    updateProduct,
+    deleteProduct,
+  },
+  graphiql: true,
+  })
+);
 
-// handlebars
-app.engine("handlebars", handlebars.engine());
-app.set("view engine", "handlebars");
-app.set("views", __dirname + "/views");
+const PORT = 8080;
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
-
-app.listen(3000, () => {
-  console.log("Server is listening on port 3000");
+app.listen(PORT, () => {
+  console.log(`Escuchando al puerto ${PORT}`);
 });
